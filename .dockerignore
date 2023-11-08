@@ -1,1 +1,16 @@
+# Exclude node_modules directories for both backend and frontend
 backend/node_modules
+frontend/node_modules
+
+# Exclude build output for the frontend
+frontend/dist
+
+# Exclude Docker-related files
+.dockerignore
+Dockerfile
+
+# Exclude Gitignore files
+.gitignore
+
+# Exclude documentation and project description
+README.md
