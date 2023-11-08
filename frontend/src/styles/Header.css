@@ -1,0 +1,84 @@
+nav {
+  padding: 0 20px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  /* justify-content: flex-end; */
+  /* background-color: grey; */
+  /* background-color: #333;  */
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+  /* background-color: gray; */
+}
+.nav-profile{
+  background-color: white;
+  padding: 2px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+
+/* header .sign-up-btn {
+  border: 1px solid #61dafb;
+  color: #61dafb;
+}
+
+header .sign-in-btn {
+  background-color: gray;
+  border: 2px solid gray;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+}
+header .sign-in-btn:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  transition: 0.4s ease-in-out;
+} */
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.logo h2{
+  /* background-color: black; */
+  /* color: white; */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.logo h2 span{
+  color: black;
+  padding: 0px 6px;
+  padding-bottom: 2px;
+  /* background-color: darkorange; */
+  /* background-color: white; */
+  border-radius: 5px;
+}
+
+.nav-items{
+  padding-right: 20px;
+}
+
+.nav-item{
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 3px 10px;
+  padding-bottom: 7px;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+
+.nav-item:hover{
+  color: white;
+  background-color: black;
+}
+
