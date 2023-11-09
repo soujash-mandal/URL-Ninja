@@ -22,8 +22,8 @@ const clerkMiddleware = async (req, res, next) => {
     });
 
     // Attach the user information to the request object for use in subsequent route handlers
-    req.email = response.data.email_addresses[0].email_address;
-    req.userId = userId;
+    req.body.email = response.data.email_addresses[0].email_address;
+    req.body.userId = userId;
     next(); // Proceed to the next middleware or route handler
   } catch (error) {
     console.error("Error decoding or retrieving user information:", error);

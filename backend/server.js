@@ -6,6 +6,7 @@ require("dotenv").config(); // Load environment variables from a .env file
 const { default: mongoose } = require("mongoose"); // Mongoose for MongoDB connection
 const path = require("path"); // Path module for working with file paths
 const urlRoutes = require("./routes/urlRoutes"); // URL routes definition
+const { redirectUrl } = require("./controllers/urlControllers/redirectUrlController");
 
 // Define the port to listen on (fallback to 3000 if PORT is not set in environment variables)
 const port = process.env.PORT || 3000;
@@ -30,6 +31,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use the URL routes defined in urlRoutes for requests to "/api/v1/url"
 app.use("/api/v1/url", urlRoutes);
+
+// redirect URL
+app.get("/url/:id", redirectUrl);
 
 // Serve static files from the "frontend/dist" directory
 app.use(express.static(path.join(__dirname, "../frontend/dist")));

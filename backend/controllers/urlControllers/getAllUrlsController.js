@@ -1,9 +1,19 @@
-const UrlModel = require("../../models/url");
+const UrlModel = require("../../models/url"); // Import the URL model
 
+// Controller function for retrieving all URLs associated with a specific userId
 const getAllUrls = async (req, res) => {
-  const { email, userId } = req;
+  const { userId } = req.body; // Extract the userId from the request body
 
-  res.status(200).json({ message: "fetched all urls", email, userId });
+  try {
+    // Retrieve all URLs from the UrlModel with the specified userId
+    const allUrls = await UrlModel.find({ userId });
+
+    // Respond with the list of retrieved URLs
+    res.json(allUrls);
+  } catch (error) {
+    console.error("Error retrieving URLs:", error); // Log an error message in case of an error
+    res.status(500).json({ message: "Error retrieving URLs" }); // Respond with an error message and status code
+  }
 };
 
 module.exports = {
