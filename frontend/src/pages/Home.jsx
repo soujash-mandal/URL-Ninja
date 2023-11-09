@@ -13,7 +13,7 @@ const Home = () => {
   const fetchAllUrls = async () => {
     const token = await session.getToken();
     try {
-      const response = await axios.get(config.API_BASE_URL + "/api/v1/all-urls", {
+      const response = await axios.get(config.API_BASE_URL + "/api/v1/url/all", {
         headers: {
           Authorization: "Bearer " + token,
         },

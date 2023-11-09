@@ -19,7 +19,7 @@ const CreateUrl = () => {
     try {
       const response = await axios.post(
         config.API_BASE_URL + "/api/v1/url",
-        { url },
+        { originalUrl: url },
         {
           headers: {
             Authorization: "Bearer " + token,

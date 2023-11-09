@@ -1,5 +1,5 @@
 {
-  "name": "clerk-react-starter",
+  "name": "url-shortener",
   "proxy": "http://localhost:3000",
   "version": "0.2.0",
   "private": true,
