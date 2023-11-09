@@ -6,11 +6,11 @@ const createUrl = async (req, res) => {
   const { originalUrl, email, userId } = req.body; // Extract the original URL, email, and userId from the request body
 
   // Check if the URL already exists in the database
-  const existingUrl = await UrlModel.findOne({ originalUrl });
+  const existingUrl = await UrlModel.findOne({ originalUrl, userId});
 
   if (existingUrl) {
     console.log(existingUrl); // Log the existing URL (for debugging purposes)
-    res.json(existingUrl); // Respond with the existing URL data
+    res.json({message:"This Url is Already shortened By you"}); // Respond with the existing URL data
   } else {
     // Generate a unique short ID for the new URL
     const shortUrl = shortid.generate();
@@ -28,7 +28,7 @@ const createUrl = async (req, res) => {
     await newUrl.save();
 
     console.log(newUrl); // Log the newly created URL (for debugging purposes)
-    res.json(newUrl); // Respond with the newly created URL data
+    res.json({message : "Url has been shortened successfully"}); // Respond with the newly created URL data
   }
 };
 

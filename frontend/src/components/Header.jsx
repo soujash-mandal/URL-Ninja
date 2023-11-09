@@ -46,13 +46,13 @@ function Header() {
         </SignedOut>
 
         <SignedIn>
-          <div className="nav-items">
+          {/* <div className="nav-items">
             <h3>
               <Link to="/create" className="nav-item">
                 create
               </Link>
             </h3>
-          </div>
+          </div> */}
           <div className="nav-profile">
             <UserButton afterSignOutUrl="/" />
           </div>

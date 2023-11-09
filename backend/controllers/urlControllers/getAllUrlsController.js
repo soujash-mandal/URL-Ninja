@@ -6,7 +6,7 @@ const getAllUrls = async (req, res) => {
 
   try {
     // Retrieve all URLs from the UrlModel with the specified userId
-    const allUrls = await UrlModel.find({ userId });
+    const allUrls = await UrlModel.find({ userId }).sort({ createdAt: -1 });
 
     // Respond with the list of retrieved URLs
     res.json(allUrls);
