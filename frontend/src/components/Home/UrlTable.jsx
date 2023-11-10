@@ -1,70 +1,31 @@
+// UrlTable.js
+import "../../styles/Home/UrlTable.css"; // Import the CSS file
+import UrlCard from "./UrlCard";
+
 // eslint-disable-next-line
 const UrlTable = ({ urls, deleteUrl, shareUrl, copyUrlToClipboard }) => {
-  const formatCreatedAt = (createdAt) => {
-    const options = {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    };
-    return new Date(createdAt).toLocaleString(undefined, options);
-  };
-
+  const blankDivs = Array.from({ length: 10 }, (_, index) => (
+    <div
+      key={index} // Don't forget to set a unique key when rendering elements in a loop
+      className="url-card"
+      style={{ boxShadow: "none", border: "none" }}
+    ></div>
+  ));
   return (
     <div className="container">
-      {/* Your comment here */}
-      <table className="url-table">
-        <thead>
-          <tr>
-            <th>Sl No</th>
-            <th>Original URL</th>
-            <th>Short URL</th>
-            <th>Copy</th>
-            <th>Share</th>
-            <th>Clicks</th>
-            <th>Created At</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* eslint-disable-next-line */}
-          {urls.map((url, index) => (
-            <tr key={url._id}>
-              <td>{index + 1}</td>
-              <td>{url.originalUrl}</td>
-              <td>{`${window.location.origin}/url/${url.shortUrl}`}</td>
-              <td>
-                <button
-                  onClick={() =>
-                    copyUrlToClipboard(
-                      `${window.location.origin}/url/${url.shortUrl}`
-                    )
-                  }
-                >
-                  Copy
-                  <i className="fas fa-copy"></i>
-                </button>
-              </td>
-              <td>
-                <button
-                  onClick={() =>
-                    shareUrl(`${window.location.origin}/url/${url.shortUrl}`)
-                  }
-                >
-                  Share
-                </button>
-              </td>
-              <td>{url.clicks}</td>
-              <td>{formatCreatedAt(url.createdAt)}</td>
-              <td>
-                <button onClick={() => deleteUrl(url._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="url-cards">
+        {/* eslint-disable-next-line */}
+        {urls.map((url) => (
+          <UrlCard
+            key={url._id}
+            url={url}
+            deleteUrl={deleteUrl}
+            shareUrl={shareUrl}
+            copyUrlToClipboard={copyUrlToClipboard}
+          />
+        ))}
+        {blankDivs}
+      </div>
     </div>
   );
 };

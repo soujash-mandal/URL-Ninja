@@ -1,29 +1,18 @@
-/* styles.css */
-.container{
-  width: 90vw;
+/* UrlTable.css */
+.container {
+  width: 80vw;
+  /* background-color: aqua; */
   margin: auto;
+  /* padding: auto; */
+  padding: auto;
 }
-.url-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .url-table th, .url-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .url-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .url-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .url-table tr:hover {
-    background-color: #ddd;
-  }
-  
+
+.url-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* background-color: antiquewhite; */
+  justify-content: space-evenly;
+}
+
+

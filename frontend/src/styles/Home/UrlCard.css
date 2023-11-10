@@ -1,0 +1,70 @@
+/* UrlCard.css */
+
+.url-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  width: 300px; /* Add a fixed width */
+}
+
+.url-details {
+  /* display: flex; */
+  justify-content: space-between;
+}
+
+.url-info {
+  flex: 1;
+}
+
+.url-info div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.url-info .url-desc{
+  padding: 0 10px;
+}
+.url-actions{
+  /* background-color: aqua; */
+  padding-top: 10px;
+  text-align: center;
+}
+.url-actions button {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.formatted-date {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* UrlCard.css */
+
+/* Add styles for the buttons */
+.url-card .url-actions button {
+  /* margin: 5px 11px; */
+  padding: 10px 28.46px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Example styles for each button */
+.url-card .url-actions .copy-button {
+  background-color: #2a79ad;
+  color: #fff;
+}
+
+.url-card .url-actions .share-button {
+  background-color: #229552;
+  color: #fff;
+}
+
+.url-card .url-actions .delete-button {
+  background-color: #e74c3c;
+  color: #fff;
+}

@@ -4,7 +4,7 @@ import { useSession } from "@clerk/clerk-react";
 import CreateUrl from "../components/Home/CreateUrl";
 import config from "../../config.json";
 import "../styles/Home/UrlTable.css";
-import "../styles/Home/NoUrl.css"
+import "../styles/Home/NoUrl.css";
 import UrlTable from "../components/Home/UrlTable";
 
 const Home = () => {
@@ -80,15 +80,18 @@ const Home = () => {
 
   return (
     <div>
-      <CreateUrl />
+      <CreateUrl fetchAllUrls={fetchAllUrls}/>
 
-      {urls.length?<UrlTable
-        urls={urls}
-        deleteUrl={deleteUrl}
-        shareUrl={shareUrl}
-        copyUrlToClipboard={copyUrlToClipboard}
-      />:<p className="no-url-message">You Don&apos;t have any URL</p>}
-      
+      {urls.length ? (
+        <UrlTable
+          urls={urls}
+          deleteUrl={deleteUrl}
+          shareUrl={shareUrl}
+          copyUrlToClipboard={copyUrlToClipboard}
+        />
+      ) : (
+        <p className="no-url-message">You Don&apos;t have any URL</p>
+      )}
     </div>
   );
 };

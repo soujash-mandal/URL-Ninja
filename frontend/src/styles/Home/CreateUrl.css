@@ -15,7 +15,7 @@
 .input {
   padding: 10px;
   margin: 5px;
-  width: 300px;
+  width: 250px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
@@ -23,7 +23,7 @@
 .submitButton {
   padding: 10px;
   margin: 5px;
-  width: 100px;
+  width: 60px;
   background-color: #0074d9;
   color: white;
   border: none;
