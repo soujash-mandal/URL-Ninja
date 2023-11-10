@@ -1,0 +1,29 @@
+/* src/styles/ProjectInfo/ProjectInfoPage.css */
+
+.project-info {
+  width: 90vw;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.section-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+h1, h2, p, ul, ol {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

@@ -5,6 +5,7 @@ import {} from "@clerk/clerk-react";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
 import Home from "./pages/Home";
+import ProjectInfoPage from "./pages/ProjectInfoPage";
 
 function App() {
   const { isLoaded, isSignedIn } = useUser();
@@ -18,7 +19,7 @@ function App() {
   }
   if (!isSignedIn) {
     // return <div>Not signed in</div>;
-    return <Home/>
+    return <ProjectInfoPage/>
   } else {
     return <Home />;
   }
