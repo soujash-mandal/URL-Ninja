@@ -34,6 +34,7 @@ function Header() {
     <header>
       <nav>
         <div className="logo" onClick={() => (window.location.href = "/")}>
+        <img src="logo.png" height={50}></img>
           <h2 className="logo-text">
             URL - SHORTENER
           </h2>

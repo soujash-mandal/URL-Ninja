@@ -1,14 +1,11 @@
 // UrlCard.js
-import { useEffect, useState } from "react";
+// import { useState } from "react";
 import "../../styles/Home/UrlCard.css"; // Import the CSS file
-import axios from "axios";
-import { Link } from 'react-router-dom';
+// import axios from "axios";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line
 const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
-  const [image, setimage] = useState(null);
-  const [title, settitle] = useState("");
-  const [site_name, setsite_name] = useState("");
 
   const formatCreatedAt = (createdAt) => {
     const options = {
@@ -28,30 +25,7 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
     return formattedDate;
   };
 
-  const getPreviewLink = async (url) => {
-    try {
-      const preview = await axios.get(
-        "https://url-metadata.onrender.com/?url=" + url
-      );
-      const data = preview.data;
-      console.log(data.image);
-      setimage(data.image);
-      settitle(data.title);
-      setsite_name(data.site_name);
-    } catch (error) {
-      console.log("Failed to get preview link");
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      // eslint-disable-next-line
-      getPreviewLink(url.originalUrl);
-    };
-  }, [url]);
-
   return (
-    
     <div className="url-card">
       <div className="url-details">
         <div className="url-info">
@@ -62,34 +36,44 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
                 title="W3Schools Free Online Web Tutorials"
               ></iframe>
             } */}
+            {/* eslint-disable */}
             <Link to={url.originalUrl}>
-            {image ? (
-              <img src={image} width={300} height={150}></img>
-            ) : (
-              <iframe
-                src={url.originalUrl}
-                
-              ></iframe>
-            )}</Link>
+              {url.image ? (
+                <img
+                  src={url.image}
+                  width={300}
+                  // height={150}
+                  alt="No Image"
+                  onError="no-image.png"
+                ></img>
+              ) : (
+                <></>
+              )}
+            </Link>
           </div>
           <div className="url-desc">
+            <div className="originalUrl">
+              {/* <strong>Original URL:</strong>  */}
+              <Link to={url.originalUrl}>{url.originalUrl}</Link>
+              
+            </div>
             <div className="site_name-div">
               <div>
                 <h2 className="site_name">
-                  {site_name ? site_name : "No Site Name"}
+                  {url.site_name ? url.site_name : url.title ? url.title : ""}
                 </h2>
               </div>
               <div>
+                {/* eslint-disable */}
                 <h2 className="click_count">{url.clicks}</h2>
               </div>
             </div>
             <div>
-              <h4 className="title">{title ? title : "No Title"}</h4>
+              <h4 className="title">
+                {url.site_name ? (url.title ? url.title : "") : url.description}
+              </h4>
             </div>
-            <div>
-              {/* <strong>Original URL:</strong>  */}
-              {url.originalUrl}
-            </div>
+
             <div className="id-date-div">
               <div style={{ paddingRight: "20px" }}>
                 {/* <strong>Short URL ID :</strong>  */}

@@ -22,6 +22,10 @@ const urlSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    image: String,
+    title: String,
+    site_name: String,
+    description: String,
   },
   { timestamps: true }
 );

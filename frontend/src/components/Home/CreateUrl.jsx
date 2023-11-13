@@ -13,13 +13,46 @@ const CreateUrl = ({ fetchAllUrls }) => {
   // State to manage the URL input and alert message
   const [url, setUrl] = useState("");
   const [alertMessage, setAlertMessage] = useState(""); // State for the alert message
+  const [image, setimage] = useState("");
+  const [title, settitle] = useState("");
+  const [description, setdescription] = useState("");
+  const [site_name, setsite_name] = useState("");
 
   // Event handler for URL input change
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
   };
 
-  // Event handler for form submission
+  const getPreviewMetadata = async (url) => {
+    try {
+      const preview = await axios.get(
+        "https://url-metadata.onrender.com/?url=" + url
+      );
+      const data = preview.data;
+
+      // Create an object with the necessary data
+      const previewData = {
+        image: data.image,
+        title: data.title,
+        site_name: data.site_name,
+        description: data.description,
+      };
+
+      // Set the state using the obtained data
+      setimage(previewData.image);
+      settitle(previewData.title);
+      setsite_name(previewData.site_name);
+      setdescription(previewData.description);
+
+      // Return the data for further use
+      return previewData;
+    } catch (error) {
+      console.error("Failed to get preview link:", error);
+      // You might want to handle the error here, or just return an empty object
+      return {};
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,13 +63,22 @@ const CreateUrl = ({ fetchAllUrls }) => {
     }
 
     try {
+      // Fetch the preview metadata
+      const previewData = await getPreviewMetadata(url);
+
       // Get the user's session token
       const token = await session.getToken();
 
       // Make a POST request to the API to create a new URL
       const response = await axios.post(
         `${config.API_BASE_URL}/api/v1/url`,
-        { originalUrl: url },
+        {
+          originalUrl: url,
+          image: previewData.image,
+          title: previewData.title,
+          site_name: previewData.site_name,
+          description: previewData.description,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,10 +89,10 @@ const CreateUrl = ({ fetchAllUrls }) => {
       // Extract data from the API response
       const data = response.data;
       console.log(data);
-      
+
       // Reset the alert message
       setAlertMessage("");
-      
+
       // Display an alert with the message from the API response
       alert(data.message);
 
