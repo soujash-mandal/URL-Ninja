@@ -10,13 +10,13 @@ nav {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
   /* background-color: gray; */
 }
-.nav-profile{
+.nav-profile {
   background-color: white;
   padding: 2px;
   border-radius: 50%;
   border: 2px solid black;
+  /* margin-right: 10px;  */
 }
-
 
 /* header .sign-up-btn {
   border: 1px solid #61dafb;
@@ -47,27 +47,35 @@ header .sign-in-btn:hover {
   cursor: pointer;
 }
 
-.logo h2{
-  /* background-color: black; */
-  /* color: white; */
-  padding: 10px;
-  border-radius: 10px;
+.logo {
+  /* background-color: black;
+  color: white;
+  padding: 1px;
+  border-radius: 10px; */
+  align-items: center;
+  /* padding-left: 20px; */
+  /* background-color: aqua; */
+}
+.logo-img {
+  /* background-color: aqua; */
+  /* padding-right: 0;
+  margin-right: 0; */
+  padding-top: 0px;
+}
+.logo-text1 {
+  /* background-color: magenta; */
+
+  margin-right: -19px;
+}
+.logo-text2 {
+  margin-left: -19px;
 }
 
-.logo h2 span{
-  color: black;
-  padding: 0px 6px;
-  padding-bottom: 2px;
-  /* background-color: darkorange; */
-  /* background-color: white; */
-  border-radius: 5px;
-}
-
-.nav-items{
+.nav-items {
   padding-right: 20px;
 }
 
-.nav-item{
+/* .nav-item{
   color: black;
   font-weight: bold;
   text-decoration: none;
@@ -75,10 +83,27 @@ header .sign-in-btn:hover {
   padding-bottom: 7px;
   border: 2px solid black;
   border-radius: 7px;
-}
+} */
 
-.nav-item:hover{
+/* .nav-item:hover{
   color: white;
   background-color: black;
+} */
+
+.nav-btn{
+  font-weight: bold;
+  font-size: medium;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #0074d9;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: -19px;
+  transition: 5ms ;
 }
 
+.nav-btn:hover{
+  background-color: #0074d9d6;
+  /* color: black; */
+}

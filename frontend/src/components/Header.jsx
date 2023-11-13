@@ -21,9 +21,12 @@ function SignInButton() {
     // </button>
     <div className="nav-items">
       <h3>
-        <Link className="nav-item" onClick={() => clerk.openSignIn({})}>
+        {/* <Link className="nav-item" > */}
+        <button className="nav-btn" onClick={() => clerk.openSignIn({})}>
           Log in
-        </Link>
+        </button>
+
+        {/* </Link> */}
       </h3>
     </div>
   );
@@ -34,13 +37,10 @@ function Header() {
     <header>
       <nav>
         <div className="logo" onClick={() => (window.location.href = "/")}>
-        <img src="logo.png" height={50}></img>
-          <h2 className="logo-text">
-            URL - SHORTENER
-          </h2>
-          
+          <h3 className="logo-text1">URL</h3>
+          <img src="logo.png" height={20} className="logo-img"></img>{" "}
+          <h3 className="logo-text2">Ninja</h3>
         </div>
-        
 
         <SignedOut>
           <SignInButton />
