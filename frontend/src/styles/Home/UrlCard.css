@@ -68,3 +68,43 @@
   background-color: #e74c3c;
   color: #fff;
 }
+
+.site_name-div{
+  display: flex;
+  justify-content: space-between;
+}
+
+.site_name,.click_count{
+  /* background-color: aqua; */
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.click_count{
+  /* background-color: #229552; */
+  padding-left: 20px;
+  padding-right: 1px;
+  color: #5555558c;
+}
+.title{
+  /* background-color: #229552; */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.id-date-div{
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createdAt{
+  width: 100px;
+  background-color: gray;
+  padding: 1px 4px 3px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}

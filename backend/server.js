@@ -6,7 +6,9 @@ require("dotenv").config(); // Load environment variables from a .env file
 const { default: mongoose } = require("mongoose"); // Mongoose for MongoDB connection
 const path = require("path"); // Path module for working with file paths
 const urlRoutes = require("./routes/urlRoutes"); // URL routes definition
-const { redirectUrl } = require("./controllers/urlControllers/redirectUrlController");
+const {
+  redirectUrl,
+} = require("./controllers/urlControllers/redirectUrlController");
 
 // Define the port to listen on (fallback to 3000 if PORT is not set in environment variables)
 const port = process.env.PORT || 3000;

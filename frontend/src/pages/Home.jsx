@@ -80,7 +80,7 @@ const Home = () => {
 
   return (
     <div>
-      <CreateUrl fetchAllUrls={fetchAllUrls}/>
+      <CreateUrl fetchAllUrls={fetchAllUrls} />
 
       {urls.length ? (
         <UrlTable
@@ -90,7 +90,7 @@ const Home = () => {
           copyUrlToClipboard={copyUrlToClipboard}
         />
       ) : (
-        <p className="no-url-message">You Don&apos;t have any URL</p>
+        <></>
       )}
     </div>
   );

@@ -1,15 +1,20 @@
 // UrlCard.js
-
-import React from "react";
+import { useEffect, useState } from "react";
 import "../../styles/Home/UrlCard.css"; // Import the CSS file
+import axios from "axios";
+import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line
 const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
+  const [image, setimage] = useState(null);
+  const [title, settitle] = useState("");
+  const [site_name, setsite_name] = useState("");
+
   const formatCreatedAt = (createdAt) => {
     const options = {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
+      // hour: "numeric",
+      // minute: "numeric",
+      // hour12: true,
       month: "short",
       day: "numeric",
       year: "numeric",
@@ -23,30 +28,77 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
     return formattedDate;
   };
 
+  const getPreviewLink = async (url) => {
+    try {
+      const preview = await axios.get(
+        "https://url-metadata.onrender.com/?url=" + url
+      );
+      const data = preview.data;
+      console.log(data.image);
+      setimage(data.image);
+      settitle(data.title);
+      setsite_name(data.site_name);
+    } catch (error) {
+      console.log("Failed to get preview link");
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      // eslint-disable-next-line
+      getPreviewLink(url.originalUrl);
+    };
+  }, [url]);
+
   return (
+    
     <div className="url-card">
       <div className="url-details">
         <div className="url-info">
           <div>
-            {
+            {/* {
               <iframe
                 src={url.originalUrl}
                 title="W3Schools Free Online Web Tutorials"
               ></iframe>
-            }
+            } */}
+            <Link to={url.originalUrl}>
+            {image ? (
+              <img src={image} width={300} height={150}></img>
+            ) : (
+              <iframe
+                src={url.originalUrl}
+                
+              ></iframe>
+            )}</Link>
           </div>
           <div className="url-desc">
-            <div>
-              <strong>Original URL:</strong> {url.originalUrl}
+            <div className="site_name-div">
+              <div>
+                <h2 className="site_name">
+                  {site_name ? site_name : "No Site Name"}
+                </h2>
+              </div>
+              <div>
+                <h2 className="click_count">{url.clicks}</h2>
+              </div>
             </div>
             <div>
-              <strong>Short URL ID :</strong> {`${url.shortUrl}`}
+              <h4 className="title">{title ? title : "No Title"}</h4>
             </div>
             <div>
-              <strong>Clicks:</strong> {url.clicks}
+              {/* <strong>Original URL:</strong>  */}
+              {url.originalUrl}
             </div>
-            <div>
-              <strong>Created At:</strong> {formatCreatedAt(url.createdAt)}
+            <div className="id-date-div">
+              <div style={{ paddingRight: "20px" }}>
+                {/* <strong>Short URL ID :</strong>  */}
+                <strong>{`${url.shortUrl}`}</strong>
+              </div>
+              <div className="createdAt">
+                {/* <strong>Created At:</strong>  */}
+                <strong>{formatCreatedAt(url.createdAt)}</strong>
+              </div>
             </div>
           </div>
         </div>
