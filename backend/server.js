@@ -6,6 +6,8 @@ require("dotenv").config(); // Load environment variables from a .env file
 const { default: mongoose } = require("mongoose"); // Mongoose for MongoDB connection
 const path = require("path"); // Path module for working with file paths
 const urlRoutes = require("./routes/urlRoutes"); // URL routes definition
+const driveRoutes = require("./routes/driveRoutes"); // URL routes definition
+
 const {
   redirectUrl,
 } = require("./controllers/urlControllers/redirectUrlController");
@@ -33,6 +35,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use the URL routes defined in urlRoutes for requests to "/api/v1/url"
 app.use("/api/v1/url", urlRoutes);
+
+// Use the URL routes defined in urlRoutes for requests to "/api/v1/url"
+app.use("/api/v1/drive", driveRoutes);
 
 // redirect URL
 app.get("/url/:id", redirectUrl);

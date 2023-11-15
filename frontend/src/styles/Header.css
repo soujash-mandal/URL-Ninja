@@ -72,23 +72,42 @@ header .sign-in-btn:hover {
 }
 
 .nav-items {
-  padding-right: 20px;
+  padding-right: 10px;
 }
 
-/* .nav-item{
-  color: black;
+.nav-item{
+  /* color: black;
   font-weight: bold;
   text-decoration: none;
   padding: 3px 10px;
   padding-bottom: 7px;
   border: 2px solid black;
-  border-radius: 7px;
-} */
+  border-radius: 7px; */
+  /* background-color: aqua; */
+  font-weight: bold;
+  font-size: medium;
+  /* padding-top: -100px; */
+  /* align-items: center;
+  text-align: center;
+  justify-content: center; */
 
-/* .nav-item:hover{
-  color: white;
-  background-color: black;
-} */
+  /* padding: 7px 14px 8px 10px; */
+  border-radius: 5px;
+  /* background-color: #0074d9;
+  color: white; */
+  
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.nav-item:hover{
+  /* text-decoration: none;
+  background-color: #0074d9d6; */
+
+  /* color: white;
+  background-color: black; */
+}
 
 .nav-btn{
   font-weight: bold;

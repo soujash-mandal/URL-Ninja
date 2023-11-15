@@ -38,7 +38,7 @@ function Header() {
       <nav>
         <div className="logo" onClick={() => (window.location.href = "/")}>
           <h3 className="logo-text1">URL</h3>
-          <img src="logo.png" height={20} className="logo-img"></img>{" "}
+          <img src="/logo.png" height={20} className="logo-img"></img>{" "}
           <h3 className="logo-text2">Ninja</h3>
         </div>
 
@@ -47,13 +47,14 @@ function Header() {
         </SignedOut>
 
         <SignedIn>
-          {/* <div className="nav-items">
-            <h3>
-              <Link to="/create" className="nav-item">
-                create
-              </Link>
-            </h3>
-          </div> */}
+          <div className="nav-items">
+          <Link to="/" className="nav-item">
+              Short-URL
+            </Link>
+            <Link to="/drive" className="nav-item">
+              Drive
+            </Link>
+          </div>
           <div className="nav-profile">
             <UserButton afterSignOutUrl="/" />
           </div>

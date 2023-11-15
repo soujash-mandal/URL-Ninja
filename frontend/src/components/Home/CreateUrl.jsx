@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSession } from "@clerk/clerk-react";
 import config from "../../../config.json";
 import "../../styles/Home/CreateUrl.css"; // Import the CSS file
+import { getPreviewMetadata } from "../../utils/getPreviewMetadata";
 
 // eslint-disable-next-line
 const CreateUrl = ({ fetchAllUrls }) => {
@@ -13,44 +14,14 @@ const CreateUrl = ({ fetchAllUrls }) => {
   // State to manage the URL input and alert message
   const [url, setUrl] = useState("");
   const [alertMessage, setAlertMessage] = useState(""); // State for the alert message
-  const [image, setimage] = useState("");
-  const [title, settitle] = useState("");
-  const [description, setdescription] = useState("");
-  const [site_name, setsite_name] = useState("");
+  // const [image, setimage] = useState("");
+  // const [title, settitle] = useState("");
+  // const [description, setdescription] = useState("");
+  // const [site_name, setsite_name] = useState("");
 
   // Event handler for URL input change
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
-  };
-
-  const getPreviewMetadata = async (url) => {
-    try {
-      const preview = await axios.get(
-        "https://url-metadata.onrender.com/?url=" + url
-      );
-      const data = preview.data;
-
-      // Create an object with the necessary data
-      const previewData = {
-        image: data.image,
-        title: data.title,
-        site_name: data.site_name,
-        description: data.description,
-      };
-
-      // Set the state using the obtained data
-      setimage(previewData.image);
-      settitle(previewData.title);
-      setsite_name(previewData.site_name);
-      setdescription(previewData.description);
-
-      // Return the data for further use
-      return previewData;
-    } catch (error) {
-      console.error("Failed to get preview link:", error);
-      // You might want to handle the error here, or just return an empty object
-      return {};
-    }
   };
 
   const handleSubmit = async (e) => {

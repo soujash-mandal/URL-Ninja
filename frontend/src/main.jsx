@@ -7,6 +7,8 @@ import Layout from "./components/Layout";
 import NoMatch from "./components/NoMatch";
 import config from "../config.json";
 import "./styles/index.css";
+import UrlDrive from "./pages/UrlDrive";
+import RedirectToMyDrive from "./pages/Drive/RedirectToMyDrive";
 
 const publishableKey = config.CLERK_PUBLISHABLE_KEY;
 
@@ -17,8 +19,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<App />} />
-            {/* <Route path="/video/:id" element={<VideoPage />} /> */}
-            {/* <Route path="/create" element={<CreatePage />} /> */}
+            <Route path="/drive" element={<RedirectToMyDrive />} />
+            <Route path="/drive/:id" element={<UrlDrive />} />
           </Route>
           <Route path="*" element={<NoMatch />} />
         </Routes>
