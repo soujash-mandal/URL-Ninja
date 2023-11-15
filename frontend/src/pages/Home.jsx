@@ -29,6 +29,13 @@ const Home = () => {
     }
   };
 
+  useEffect(
+    () => {
+      fetchAllUrls();
+    },
+    // eslint-disable-next-line
+    []
+  );
   const deleteUrl = async (urlId) => {
     try {
       const token = await session.getToken();
@@ -44,14 +51,6 @@ const Home = () => {
       // Handle any errors here
     }
   };
-
-  useEffect(
-    () => {
-      fetchAllUrls();
-    },
-    // eslint-disable-next-line
-    []
-  );
 
   const shareUrl = async (text) => {
     try {

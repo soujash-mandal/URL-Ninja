@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 // eslint-disable-next-line
 const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
-
   const formatCreatedAt = (createdAt) => {
     const options = {
       // hour: "numeric",
@@ -15,6 +14,24 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
       month: "short",
       day: "numeric",
       year: "numeric",
+    };
+
+    const formattedDate = new Date(createdAt).toLocaleString(
+      undefined,
+      options
+    );
+
+    return formattedDate;
+  };
+
+  const formatCreatedAtTime = (createdAt) => {
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+      // month: "short",
+      // day: "numeric",
+      // year: "numeric",
     };
 
     const formattedDate = new Date(createdAt).toLocaleString(
@@ -44,7 +61,7 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
                   width={300}
                   // height={150}
                   alt="No Image"
-                  onError="no-image.png"
+                  // onError="no-image.png"
                 ></img>
               ) : (
                 <></>
@@ -55,7 +72,6 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
             <div className="originalUrl">
               {/* <strong>Original URL:</strong>  */}
               <Link to={url.originalUrl}>{url.originalUrl}</Link>
-              
             </div>
             <div className="site_name-div">
               <div>
@@ -77,7 +93,11 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
             <div className="id-date-div">
               <div style={{ paddingRight: "20px" }}>
                 {/* <strong>Short URL ID :</strong>  */}
-                <strong>{`${url.shortUrl}`}</strong>
+                {url.shortUrl ? (
+                  <strong>{`${url.shortUrl}`}</strong>
+                ) : (
+                  <>{formatCreatedAtTime(url.createdAt)}</>
+                )}
               </div>
               <div className="createdAt">
                 {/* <strong>Created At:</strong>  */}
@@ -90,19 +110,23 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
           {/* Apply styles to the buttons */}
           <button
             className="copy-button"
-            onClick={() =>
-              copyUrlToClipboard(
-                `${window.location.origin}/url/${url.shortUrl}`
-              )
-            }
+            onClick={() => {
+              url.shortUrl
+                ? copyUrlToClipboard(
+                    `${window.location.origin}/url/${url.shortUrl}`
+                  )
+                : copyUrlToClipboard(url.originalUrl);
+            }}
           >
             Copy <i className="fas fa-copy"></i>
           </button>
           <button
             className="share-button"
-            onClick={() =>
-              shareUrl(`${window.location.origin}/url/${url.shortUrl}`)
-            }
+            onClick={() => {
+              url.shortUrl
+                ? shareUrl(`${window.location.origin}/url/${url.shortUrl}`)
+                : shareUrl(url.originalUrl);
+            }}
           >
             Share
           </button>

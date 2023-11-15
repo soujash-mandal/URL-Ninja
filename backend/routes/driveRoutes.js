@@ -5,6 +5,7 @@ const { createFolder } = require("../controllers/driveControllers/FolderControll
 const { createDriveUrl } = require("../controllers/driveControllers/UrlControllers/createDriveUrlController");
 const { getAllFolders } = require("../controllers/driveControllers/FolderControllers/getAllFolders");
 const { getAllDriveUrls } = require("../controllers/driveControllers/UrlControllers/getAllUrls");
+const { deleteDriveUrl } = require("../controllers/driveControllers/UrlControllers/deleteDriveUrlController");
 const router = express.Router(); // Create an instance of an Express router
 
 // Define routes
@@ -15,5 +16,6 @@ router.get("/folder", clerkMiddleware, getAllFolders); // Define a route for del
 
 router.get("/url", clerkMiddleware, getAllDriveUrls); // Define a route for retrieving all URLs
 router.post("/url", clerkMiddleware, createDriveUrl); // Define a route for creating a URL
+router.delete("/url", clerkMiddleware, deleteDriveUrl); // Define a route for creating a URL
 
 module.exports = router; // Export the router for use in the application

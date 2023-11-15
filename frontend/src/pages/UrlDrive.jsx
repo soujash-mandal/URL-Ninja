@@ -4,6 +4,7 @@ import axios from "axios";
 import config from "../../config.json";
 import CreateFolderAndUrl from "../components/UrlDrive/CreateFolderAndUrl";
 import { useParams } from "react-router-dom";
+import UrlTable from "../components/Home/UrlTable";
 
 const UrlDrive = () => {
   const [folders, setFolders] = useState([]);
@@ -11,6 +12,47 @@ const UrlDrive = () => {
   const { session } = useSession();
   const { id } = useParams();
   console.log(id);
+
+  const deleteUrl = async (urlId) => {
+    try {
+      const token = await session.getToken();
+      await axios.delete(config.API_BASE_URL + "/api/v1/drive/url", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        data: { urlId },
+      });
+      // Fetch the updated list of URLs after deletion
+      fetchAllUrls();
+    } catch (error) {
+      // Handle any errors here
+    }
+  };
+
+  const shareUrl = async (text) => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "Share this URL",
+          text: text,
+        });
+      } else {
+        alert("Sharing is not supported on this device/browser.");
+      }
+    } catch (error) {
+      console.error("Error sharing URL:", error);
+    }
+  };
+
+  const copyUrlToClipboard = (text) => {
+    const tempInput = document.createElement("input");
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    alert("URL copied to clipboard.");
+  };
 
   const fetchAllUrls = async () => {
     const token = await session.getToken();
@@ -91,19 +133,16 @@ const UrlDrive = () => {
       </div>
       {/* Url List */}
       <div>
-        <h2>Urls</h2>
-        <ul>
-          {urls.length ? (
-            urls.map((url, index) => (
-              <li key={index}>
-                <a href={url.originalUrl}>
-                {url.originalUrl}</a>
-              </li>
-            ))
-          ) : (
-            <></>
-          )}
-        </ul>
+        {urls.length ? (
+          <UrlTable
+            urls={urls}
+            deleteUrl={deleteUrl}
+            shareUrl={shareUrl}
+            copyUrlToClipboard={copyUrlToClipboard}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
