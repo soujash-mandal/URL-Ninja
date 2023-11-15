@@ -5,6 +5,7 @@ import config from "../../config.json";
 import CreateFolderAndUrl from "../components/UrlDrive/CreateFolderAndUrl";
 import { useParams } from "react-router-dom";
 import UrlTable from "../components/Home/UrlTable";
+import FolderList from "../components/UrlDrive/DriveFolderList";
 
 const UrlDrive = () => {
   const [folders, setFolders] = useState([]);
@@ -117,20 +118,12 @@ const UrlDrive = () => {
   }, [session]); // Include session as a dependency to re-run effect when session changes
 
   return (
-    <div>
+    <div className="container">
+      {/* /{id} */}
       <CreateFolderAndUrl />
-
       {/* Folder List */}
-      <div>
-        <h2>Folders</h2>
-        <ul>
-          {folders.map((folder, index) => (
-            <li key={index}>
-              <a href={folder._id}>{folder.name}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {folders ? <FolderList folders={folders} /> : <></>}
+
       {/* Url List */}
       <div>
         {urls.length ? (

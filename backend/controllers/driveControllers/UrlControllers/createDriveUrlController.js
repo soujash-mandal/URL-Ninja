@@ -13,14 +13,14 @@ const createDriveUrl = async (req, res) => {
     parentFolder,
   } = req.body; // Extract the original URL, email, and userId from the request body
 
-  // Check if the URL already exists in the database
-  const existingUrl = await DriveUrlModel.findOne({ originalUrl, userId });
+  // // Check if the URL already exists in the database
+  // const existingUrl = await DriveUrlModel.findOne({ originalUrl, userId });
 
-  if (existingUrl) {
-    console.log(existingUrl); // Log the existing URL (for debugging purposes)
-    res.json({ message: "Already saved" }); // Respond with the existing URL data
-  } else {
-    // Create a new URL document with the provided data
+  // if (existingUrl) {
+  //   console.log(existingUrl); // Log the existing URL (for debugging purposes)
+  //   res.json({ message: "Already saved" }); // Respond with the existing URL data
+  // } else {
+  //   // Create a new URL document with the provided data
     const newUrl = new DriveUrlModel({
       originalUrl,
       userId,
@@ -38,7 +38,7 @@ const createDriveUrl = async (req, res) => {
     console.log(newUrl); // Log the newly created URL (for debugging purposes)
     res.json({ message: "Url is saved" }); // Respond with the newly created URL data
   }
-};
+// };
 
 module.exports = {
   createDriveUrl,
