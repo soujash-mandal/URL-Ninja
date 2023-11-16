@@ -4,9 +4,10 @@ import { useSession } from "@clerk/clerk-react";
 import config from "../../../config.json";
 import { useParams } from "react-router-dom";
 
-const CreateFolderAndUrl = () => {
+const CreateFolderAndUrl = ({ fetchAllUrls, fetchAllFolders }) => {
   const { session } = useSession();
   const { id } = useParams();
+
   const handleCreateFolder = async (e) => {
     e.preventDefault();
     const newFolderName = prompt("Enter folder name:");
@@ -42,7 +43,7 @@ const CreateFolderAndUrl = () => {
       alert(data.message);
 
       // // Fetch all URLs again to update the UI
-      // fetchAllUrls();
+      fetchAllFolders();
 
       // // Reset the URL input field
       // setUrl("");
@@ -52,8 +53,9 @@ const CreateFolderAndUrl = () => {
     }
   };
 
-  const handleCreateUrl = async () => {
-    const newLinkUrl = prompt("Enter link URL:");
+  const handleCreateUrl = async (e) => {
+    e.preventDefault();
+    const newLinkUrl = prompt("Enter new URL:");
     // Check if the URL input is empty or contains only whitespace
     if (newLinkUrl.trim() === "") {
       alert("URL should not be empty");
@@ -90,6 +92,8 @@ const CreateFolderAndUrl = () => {
       console.log(data);
 
       alert(data.message);
+
+      fetchAllUrls();
     } catch (error) {
       // Handle any errors that occur during the API request
       console.log("Error: " + error);
@@ -98,8 +102,12 @@ const CreateFolderAndUrl = () => {
 
   return (
     <div>
-      <button onClick={handleCreateFolder}>Create Folder</button>
-      <button onClick={handleCreateUrl}>Create Link</button>
+      <button onClick={handleCreateFolder} className="btn-drive">
+        New Folder
+      </button>
+      <button onClick={handleCreateUrl} className="btn-drive">
+        New URL
+      </button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useSession } from "@clerk/clerk-react";
+import { useSession, useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../config.json";
@@ -6,13 +6,27 @@ import CreateFolderAndUrl from "../components/UrlDrive/CreateFolderAndUrl";
 import { useParams } from "react-router-dom";
 import UrlTable from "../components/Home/UrlTable";
 import FolderList from "../components/UrlDrive/DriveFolderList";
+import { ClipLoader } from "react-spinners";
+import ProjectInfoPage from "./ProjectInfoPage";
 
 const UrlDrive = () => {
   const [folders, setFolders] = useState([]);
+  const [loading, setloading] = useState(false);
   const [urls, setUrls] = useState([]);
   const { session } = useSession();
   const { id } = useParams();
-  console.log(id);
+  const { isLoaded, isSignedIn } = useUser();
+  // console.log(id);
+
+  // const { isLoaded, isSignedIn } = useUser();
+
+  // while (!isLoaded) {
+  //   return (
+  //     <div className="loading-container">
+  //       <ClipLoader size={50} color="#123abc" loading={true} />
+  //     </div>
+  //   );
+  // }
 
   const deleteUrl = async (urlId) => {
     try {
@@ -25,6 +39,22 @@ const UrlDrive = () => {
       });
       // Fetch the updated list of URLs after deletion
       fetchAllUrls();
+    } catch (error) {
+      // Handle any errors here
+    }
+  };
+
+  const deleteFolder = async (folderId) => {
+    try {
+      const token = await session.getToken();
+      await axios.delete(config.API_BASE_URL + "/api/v1/drive/folder", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        data: { folderId },
+      });
+      // Fetch the updated list of URLs after deletion
+      fetchAllFolders();
     } catch (error) {
       // Handle any errors here
     }
@@ -56,6 +86,7 @@ const UrlDrive = () => {
   };
 
   const fetchAllUrls = async () => {
+    // setloading(true);
     const token = await session.getToken();
     try {
       const response = await axios.get(
@@ -74,11 +105,13 @@ const UrlDrive = () => {
     } catch (error) {
       // Handle any errors here
     }
+    setloading(false);
   };
 
   const fetchAllFolders = async () => {
+    setloading(true);
     const token = await session.getToken();
-    console.log(token);
+    // console.log(token);
     try {
       const response = await axios.get(
         config.API_BASE_URL + "/api/v1/drive/folder",
@@ -96,13 +129,14 @@ const UrlDrive = () => {
     } catch (error) {
       // Handle any errors here
     }
+    setloading(false);
   };
 
   useEffect(() => {
     // Define the fetchData function
     const fetchData = async () => {
-      await fetchAllUrls();
       await fetchAllFolders();
+      await fetchAllUrls();
     };
 
     // Call the fetchData function when the component mounts
@@ -117,16 +151,65 @@ const UrlDrive = () => {
     };
   }, [session]); // Include session as a dependency to re-run effect when session changes
 
+
+  while (!isLoaded) {
+    return (
+      <div className="loading-container">
+        <ClipLoader size={50} color="#123abc" loading={true} />
+      </div>
+    );
+  }
+  while (!isSignedIn) {
+    return (
+      <div className="container">
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: "100px", paddingTop: "150px" }}
+        >
+          cloud_upload
+        </span>
+        You are not logged in
+      </div>
+    );
+  }
+  while (loading) {
+    return (
+      <div className="loading-container">
+        <ClipLoader size={50} color="#123abc" loading={true} />
+      </div>
+    );
+  }
   return (
     <div className="container">
       {/* /{id} */}
-      <CreateFolderAndUrl />
+      <CreateFolderAndUrl
+        fetchAllFolders={fetchAllFolders}
+        fetchAllUrls={fetchAllUrls}
+      />
+      {/* case when both folder and urls does not exist */}
+      {!folders?.length && !urls?.length ? (
+        <>
+          <span
+            className="material-symbols-outlined"
+            style={{ fontSize: "100px", paddingTop: "150px" }}
+          >
+            cloud_upload
+          </span>
+          Empty Folder
+        </>
+      ) : (
+        <></>
+      )}
       {/* Folder List */}
-      {folders ? <FolderList folders={folders} /> : <></>}
+      {folders?.length ? (
+        <FolderList folders={folders} deleteFolder={deleteFolder} />
+      ) : (
+        <></>
+      )}
 
       {/* Url List */}
       <div>
-        {urls.length ? (
+        {urls?.length ? (
           <UrlTable
             urls={urls}
             deleteUrl={deleteUrl}

@@ -1,8 +1,8 @@
-import DriveFolderCard from "./DriveFolderCard"
+import DriveFolderCard from "./DriveFolderCard";
 
 // eslint-disable-next-line
-const FolderList = ({folders}) => {
-  const blankDivs = Array.from({ length: 20 }, (_, index) => (
+const FolderList = ({ folders, deleteFolder }) => {
+  const blankDivs = Array.from({ length: 7 }, (_, index) => (
     <div
       key={index} // Don't forget to set a unique key when rendering elements in a loop
       className="folder-card"
@@ -11,15 +11,18 @@ const FolderList = ({folders}) => {
   ));
   return (
     <div className="container">
-        <div className="folder-cards">
-          {folders.map((folder, index) => (
-            <a href={folder._id} key={index}><DriveFolderCard key={index} folder={folder}/></a>
-            
-          ))}
-          {/* {blankDivs} */}
-        </div>
+      <div className="folder-cards">
+        {folders.map((folder, index) => (
+          <DriveFolderCard
+            key={index}
+            folder={folder}
+            deleteFolder={deleteFolder}
+          />
+        ))}
+        {/* {blankDivs} */}
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default FolderList
+export default FolderList;

@@ -48,7 +48,7 @@ function Header() {
 
         <SignedIn>
           <div className="nav-items">
-          <Link to="/" className="nav-item">
+          <Link to="/short-url" className="nav-item">
               Short-URL
             </Link>
             <Link to="/drive" className="nav-item">

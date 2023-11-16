@@ -2,12 +2,12 @@ const DriveUrlModel = require("../../../models/driveUrl"); // Import the URL mod
 
 const deleteDriveUrl = async (req, res) => {
   const { email, userId, urlId } = req.body; // Extract user information from the request body
-
+  console.log(userId, urlId);
   try {
-    // Write code to delete one item from DriveUrlModel
+    // Write code to delete one item from DriveUrlModel 
     // Example: Assuming you want to delete a URL by its user ID
-    const deletedUrl = await DriveUrlModel.findByIdAndDelete(urlId);
-
+    const deletedUrl = await DriveUrlModel.findOneAndRemove({ _id:urlId, userId });
+    console.log(deletedUrl);
     if (!deletedUrl) {
       return res.status(404).json({ message: "URL not found" });
     }

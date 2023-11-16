@@ -16,11 +16,11 @@ const ProjectInfoPage = () => {
       <div className="section-container">
         <h2>Features</h2>
         <ul>
-          <li>solves problem with long URL by shortening</li>
-          <li><del>shorten URL Id is customizable and depends on the availability of the Id</del></li>
+          <li>solves problem with long URLs by shortening them</li>
+          {/* <li><del>shorten URL Id is customizable and depends on the availability of the Id</del></li>
           <li><del>Pagination to your all URLs, Per page contains 10 URLs</del></li>
           <li>Columns are Serial No. based on created Date, Original URL, Short URL, Copy Button, Share Button, Clicks, Created At info, and delete button</li>
-          <li><del>Allows 10 free shortening per user, to make more you need to buy premium membership</del></li>
+          <li><del>Allows 10 free shortening per user, to make more you need to buy premium membership</del></li> */}
         </ul>
       </div>
 
@@ -71,7 +71,7 @@ const ProjectInfoPage = () => {
       <div className="section-container">
         <h2>GitHub Repository</h2>
         <p>
-          Find the project on GitHub: <a href="https://github.com/soujash-mandal/URL-Shortener" target="_blank" rel="noopener noreferrer">URL Shortener GitHub Repository</a>
+          Find the project on GitHub: <a href="https://github.com/soujash-mandal/URL-Shortener" target="_blank" rel="noopener noreferrer">Url Ninja GitHub Repository</a>
         </p>
       </div>
     </div>

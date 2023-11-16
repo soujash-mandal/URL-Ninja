@@ -18,9 +18,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<App />} />
+            <Route index element={<RedirectToMyDrive />} />
             <Route path="/drive" element={<RedirectToMyDrive />} />
             <Route path="/drive/:id" element={<UrlDrive />} />
+            <Route path="/short-url" element={<App/>}/>
           </Route>
           <Route path="*" element={<NoMatch />} />
         </Routes>

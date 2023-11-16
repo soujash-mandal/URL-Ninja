@@ -1,4 +1,4 @@
-# URL Shortener
+# Url Ninja
 
 This is a brief description of the project.
 
