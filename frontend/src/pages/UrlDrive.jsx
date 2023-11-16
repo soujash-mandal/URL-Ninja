@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import UrlTable from "../components/Home/UrlTable";
 import FolderList from "../components/UrlDrive/DriveFolderList";
 import { ClipLoader } from "react-spinners";
-import ProjectInfoPage from "./ProjectInfoPage";
 
 const UrlDrive = () => {
   const [folders, setFolders] = useState([]);
@@ -150,7 +149,6 @@ const UrlDrive = () => {
       window.removeEventListener("beforeunload", fetchData);
     };
   }, [session]); // Include session as a dependency to re-run effect when session changes
-
 
   while (!isLoaded) {
     return (

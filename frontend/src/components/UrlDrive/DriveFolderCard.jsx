@@ -26,9 +26,11 @@ const DriveFolderCard = ({ folder, deleteFolder }) => {
 
   return (
     <div className="drive-card-container">
-      <div className="drive-card" title={folder.name}>
-        <a href={"/drive/" + folder._id}>📂 {truncatedName}</a>
-      </div>
+      <a href={"/drive/" + folder._id}>
+        <div className="drive-card" title={folder.name}>
+          📂 {truncatedName}
+        </div>
+      </a>
       {/* <button className="btn-folder-edit" title="edit">
         <span className="material-symbols-outlined ">edit</span>
       </button> */}

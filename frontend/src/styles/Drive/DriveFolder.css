@@ -37,7 +37,7 @@
   }
 }
 
-.drive-card a {
+.drive-card-container a {
   color: rgba(0, 0, 0, 0.807);
   text-decoration: none;
 }
