@@ -1,0 +1,12 @@
+.folder-path-container {
+  /* background-color: aqua; */
+  padding-top: 20px;
+  padding-left: 20px;
+  
+}
+
+.folder-path-container span {
+  font-size: large;
+  /* background-color: orange; */
+  font-weight: bolder;
+}

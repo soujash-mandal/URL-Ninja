@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import UrlTable from "../components/Home/UrlTable";
 import FolderList from "../components/UrlDrive/DriveFolderList";
 import { ClipLoader } from "react-spinners";
+import DrivePath from "../components/UrlDrive/DrivePath";
 
 const UrlDrive = () => {
   const [folders, setFolders] = useState([]);
@@ -15,17 +16,6 @@ const UrlDrive = () => {
   const { session } = useSession();
   const { id } = useParams();
   const { isLoaded, isSignedIn } = useUser();
-  // console.log(id);
-
-  // const { isLoaded, isSignedIn } = useUser();
-
-  // while (!isLoaded) {
-  //   return (
-  //     <div className="loading-container">
-  //       <ClipLoader size={50} color="#123abc" loading={true} />
-  //     </div>
-  //   );
-  // }
 
   const deleteUrl = async (urlId) => {
     try {
@@ -113,7 +103,7 @@ const UrlDrive = () => {
     // console.log(token);
     try {
       const response = await axios.get(
-        config.API_BASE_URL + "/api/v1/drive/folder",
+        config.API_BASE_URL + "/api/v1/drive/folder/all",
         {
           params: {
             parentFolder: id,
@@ -178,47 +168,49 @@ const UrlDrive = () => {
     );
   }
   return (
-    <div className="container">
-      {/* /{id} */}
-      <CreateFolderAndUrl
-        fetchAllFolders={fetchAllFolders}
-        fetchAllUrls={fetchAllUrls}
-      />
-      {/* case when both folder and urls does not exist */}
-      {!folders?.length && !urls?.length ? (
-        <>
-          <span
-            className="material-symbols-outlined"
-            style={{ fontSize: "100px", paddingTop: "150px" }}
-          >
-            cloud_upload
-          </span>
-          Empty Folder
-        </>
-      ) : (
-        <></>
-      )}
-      {/* Folder List */}
-      {folders?.length ? (
-        <FolderList folders={folders} deleteFolder={deleteFolder} />
-      ) : (
-        <></>
-      )}
-
-      {/* Url List */}
-      <div>
-        {urls?.length ? (
-          <UrlTable
-            urls={urls}
-            deleteUrl={deleteUrl}
-            shareUrl={shareUrl}
-            copyUrlToClipboard={copyUrlToClipboard}
-          />
+    <>
+      <DrivePath id={id} session={session} />
+      <div className="container">
+        <CreateFolderAndUrl
+          fetchAllFolders={fetchAllFolders}
+          fetchAllUrls={fetchAllUrls}
+        />
+        {/* case when both folder and urls does not exist */}
+        {!folders?.length && !urls?.length ? (
+          <>
+            <span
+              className="material-symbols-outlined"
+              style={{ fontSize: "100px", paddingTop: "150px" }}
+            >
+              cloud_upload
+            </span>
+            Empty Folder
+          </>
         ) : (
           <></>
         )}
+        {/* Folder List */}
+        {folders?.length ? (
+          <FolderList folders={folders} deleteFolder={deleteFolder} />
+        ) : (
+          <></>
+        )}
+
+        {/* Url List */}
+        <div>
+          {urls?.length ? (
+            <UrlTable
+              urls={urls}
+              deleteUrl={deleteUrl}
+              shareUrl={shareUrl}
+              copyUrlToClipboard={copyUrlToClipboard}
+            />
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

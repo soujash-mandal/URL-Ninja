@@ -14,10 +14,6 @@ const driveFolderSchema = new mongoose.Schema(
     email: {
       type: String,
     },
-    level: {
-      type: Number,
-      default: 0,
-    },
     sharedAll: {
       type: Boolean,
       default: false,
