@@ -6,7 +6,7 @@ import CreateFolderAndUrl from "../components/UrlDrive/CreateFolderAndUrl";
 import { useParams } from "react-router-dom";
 import UrlTable from "../components/Home/UrlTable";
 import FolderList from "../components/UrlDrive/DriveFolderList";
-import { ClipLoader } from "react-spinners";
+// import { ClipLoader } from "react-spinners";
 import DrivePath from "../components/UrlDrive/DrivePath";
 
 const UrlDrive = () => {
@@ -75,7 +75,7 @@ const UrlDrive = () => {
   };
 
   const fetchAllUrls = async () => {
-    // setloading(true);
+    setloading(true);
     const token = await session.getToken();
     try {
       const response = await axios.get(
@@ -142,9 +142,16 @@ const UrlDrive = () => {
 
   while (!isLoaded) {
     return (
-      <div className="loading-container">
-        <ClipLoader size={50} color="#123abc" loading={true} />
-      </div>
+      <>
+        <DrivePath id={id} session={session} />
+        <div className="container">
+          <CreateFolderAndUrl
+            fetchAllFolders={fetchAllFolders}
+            fetchAllUrls={fetchAllUrls}
+          />
+          <>Loading...</>
+        </div>
+      </>
     );
   }
   while (!isSignedIn) {
@@ -160,13 +167,7 @@ const UrlDrive = () => {
       </div>
     );
   }
-  while (loading) {
-    return (
-      <div className="loading-container">
-        <ClipLoader size={50} color="#123abc" loading={true} />
-      </div>
-    );
-  }
+
   return (
     <>
       <DrivePath id={id} session={session} />
@@ -176,7 +177,9 @@ const UrlDrive = () => {
           fetchAllUrls={fetchAllUrls}
         />
         {/* case when both folder and urls does not exist */}
-        {!folders?.length && !urls?.length ? (
+        {loading ? (
+          <>Loading...</>
+        ) : !folders?.length && !urls?.length ? (
           <>
             <span
               className="material-symbols-outlined"

@@ -36,7 +36,7 @@ const createDriveUrl = async (req, res) => {
     await newUrl.save();
 
     console.log(newUrl); // Log the newly created URL (for debugging purposes)
-    res.json({ message: "Url is saved" }); // Respond with the newly created URL data
+    res.json({ message: "✅ Url Uploaded" }); // Respond with the newly created URL data
   }
 // };
 
