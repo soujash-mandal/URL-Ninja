@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import config from "../../../config.json";
 import { useSession } from "@clerk/clerk-react";
-import { ClipLoader } from "react-spinners";
-import '../../styles/Drive/DrivePath.css'
+import "../../styles/Drive/DrivePath.css";
 
 // eslint-disable-next-line
 const DrivePath = ({ id }) => {
@@ -67,45 +66,30 @@ const DrivePath = ({ id }) => {
     return () => {
       window.removeEventListener("beforeunload", fetchData);
     };
+    // eslint-disable-next-line
   }, [session]); // Include session as a dependency to re-run effect when session changes
-
-  while (loading) {
-    return (
-      <div className="loading-container">
-        <ClipLoader size={50} color="#123abc" loading={true} />
-      </div>
-    );
-  }
-  // if (id == "my-drive") {
-  //   return <div>my-drive</div>;
-  // } else if (parentFolderId == "my-drive") {
-  //   return (
-  //     <div>
-  //       <a href="my-drive">my-drive</a> / {currentFolder}
-  //     </div>
-  //   );
-  // }
 
   return (
     <>
       <div className="folder-path-container">
-        {parentFolderId ? (
+        {loading ? (
+          <>loading ...</>
+        ) : parentFolderId ? (
           parentFolderName ? (
             <span>
               .. / <a href={parentFolderId}>{parentFolderName}</a> /{" "}
+              <span>{currentFolder}</span>
             </span>
           ) : (
             <span>
               <a href={parentFolderId}>{parentFolderId}</a> /{" "}
+              <span>{currentFolder}</span>
             </span>
           )
         ) : (
-          <span></span>
+          <span>{currentFolder}</span>
         )}
-        <span>{currentFolder}</span>
-        
       </div>
-
     </>
   );
 };

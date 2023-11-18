@@ -17,6 +17,9 @@ const CreateFolderAndUrl = ({ fetchAllUrls, fetchAllFolders }) => {
     setuploading(true);
     e.preventDefault();
     const newFolderName = prompt("Enter folder name:");
+    if (newFolderName == null) {
+      setuploading(false);
+    }
     // Check if the URL input is empty or contains only whitespace
     if (newFolderName.trim() === "") {
       setuploading(false);
@@ -62,6 +65,9 @@ const CreateFolderAndUrl = ({ fetchAllUrls, fetchAllFolders }) => {
     setuploading(true);
     e.preventDefault();
     const newLinkUrl = prompt("Enter new URL:");
+    if (newLinkUrl == null) {
+      setuploading(false);
+    }
     // Check if the URL input is empty or contains only whitespace
     if (newLinkUrl.trim() === "") {
       setuploadMessage("❌ URL should not be empty");

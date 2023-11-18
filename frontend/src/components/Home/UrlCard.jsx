@@ -54,7 +54,7 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
               ></iframe>
             } */}
             {/* eslint-disable */}
-            <Link to={url.originalUrl}>
+            <a href={url.originalUrl} target="_blank">
               {url.image ? (
                 <img
                   src={url.image}
@@ -66,12 +66,12 @@ const UrlCard = ({ url, deleteUrl, shareUrl, copyUrlToClipboard }) => {
               ) : (
                 <></>
               )}
-            </Link>
+            </a>
           </div>
           <div className="url-desc">
             <div className="originalUrl">
               {/* <strong>Original URL:</strong>  */}
-              <Link to={url.originalUrl}>{url.originalUrl}</Link>
+              <a href={url.originalUrl} target="_blank">{url.originalUrl}</a>
             </div>
             <div className="site_name-div">
               <div>

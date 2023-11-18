@@ -138,6 +138,7 @@ const UrlDrive = () => {
     return () => {
       window.removeEventListener("beforeunload", fetchData);
     };
+    //eslint-disable-next-line
   }, [session]); // Include session as a dependency to re-run effect when session changes
 
   while (!isLoaded) {
